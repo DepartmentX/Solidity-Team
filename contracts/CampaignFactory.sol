@@ -9,12 +9,19 @@ contract CampaignFactory {
 
     event CampaignCreated(address campaignAddress, address creator);
 
-    uint Campaign_number = 0;
+    uint public Campaign_number;
+
+    constructor() {
+        Campaign_number = 0;
+    }
 
     function createCampaign(string[] memory _candidateNames, uint256 _durationInMinutes) public {
+        require(_candidateNames.length > 0, "At least one candidate is required");
+        require(_durationInMinutes > 0, "Duration must be greater than 0");
+        
         Campaign newCampaign = new Campaign(_candidateNames, _durationInMinutes, msg.sender, Campaign_number);
         Campaign_number++;
-        deployedCampaigns.push((newCampaign));
+        deployedCampaigns.push(newCampaign);
         emit CampaignCreated(address(newCampaign), msg.sender);
     }
 
