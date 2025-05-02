@@ -12,7 +12,7 @@ module.exports = {
     hardhat: {},
     ganache: {
       url: "http://127.0.0.1:7545", 
-      accounts: [PRIVATE_KEY]
+      accounts: [`0x${PRIVATE_KEY}`]
     }
   }
 };
